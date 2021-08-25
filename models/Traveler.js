@@ -5,7 +5,7 @@ class Traveler {
     //     this._healthy = true;
     // }
 
-    constructor(name, isHealthy = 'true', food = '1') {
+    constructor(name = 'string', isHealthy = 'true', food = '1') {
         this.name = name;
         this._food = Number(food);
         this._isHealthy = Boolean(isHealthy);
@@ -18,19 +18,19 @@ class Traveler {
         return this._food;
     }
 
-    set ishealthy(value){
-        this._ishealthy = value;
+    set isHealthy(value){
+        this._isHealthy = value;
     }
-    get ishealthy(){
-        return this._ishealthy;
+    get isHealthy(){
+        return this._isHealthy;
     }
 
-    hunt = () => {
+    hunt() {
         this.food += 2
     }
 
-    eat = () => {
-        return this.food > 0 ? this.food-- : this.ishealthy = false;
+    eat() {
+        return this.food > 0 ? this.food-- : this.isHealthy = false;
     }
 }
 

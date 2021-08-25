@@ -13,7 +13,7 @@ class Wagon {
         return this.capacity - this.passengers.length
     }
 
-    join = (traveler) => {
+    join(traveler) {
         return this.getAvailableSeatCount() > 0 ? this.passengers=traveler : console.log("There's no empty seat on this Wagon")
     }
 

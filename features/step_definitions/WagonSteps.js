@@ -4,19 +4,21 @@ const assert = require("assert");
 const Traveler = require("./../../models/Traveler")
 const { carroca } = require("./../../app");
 
-let passengers        = [];
+let passengers        ;
 let availableSeat     = 0;
 let totalFood         = 0;
 let shouldQuarantine  = null;
 let triedToComeAboard = {};
+let contador = 1;
 
 /** GIVEN */
 Given('a capacidade da carroça igual a {int}', function (int) {
     carroca.capacity = int;
+    
 });
 
 Given('a carroça sempre iniciando vazia', function () {
-    carroca.passengers = [];
+    passengers = [];
 });
 
 Given('o passageiro de nome <name> que está com saúde <isHealthy> e tem <food> refeições', function (dataTable) {
@@ -31,6 +33,8 @@ Given('o passageiro de nome <name> que está com saúde <isHealthy> e tem <food>
 
 Given('a entrada do passageiro {string}', function (string) {
     let comingAboard = passengers.find(passenger => passenger.name === string);
+    console.log(comingAboard, contador)
+    contador++
     carroca.join(comingAboard);
 });
 
@@ -48,6 +52,7 @@ When('me perguntarem se devemos fazer quarentena', function () {
 });
 
 When('o passageiro {string} tentar subir a bordo', function (string) {
+    // console.log(carroca.passengers)
     let comingAboard = passengers.find(passenger => passenger.name === string);
     triedToComeAboard = comingAboard;
     carroca.join(comingAboard);
@@ -77,6 +82,8 @@ Then('ele não deverá ser adicionada à lista de passageiros', function () {
 Then('ele deverá ser adicionada à lista de passageiros', function () {
     let filter = carroca.passengers.filter(passenger => passenger.name === triedToComeAboard.name);
     let isAboard = filter.length > 0;
+    // console.log(carroca.passengers)
+    // console.log(isAboard)
 
     assert.strictEqual(isAboard, true);
 });
